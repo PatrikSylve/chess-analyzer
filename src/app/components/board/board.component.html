@@ -1,5 +1,5 @@
 <div class="container-fluid pt-5">
-    <div class="row game-header" *ngIf="selectedGame">
+    <div class="row game-header d-flex justify-content-between" *ngIf="selectedGame">
         <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(-1)">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
@@ -15,7 +15,7 @@
         </ngx-chess-board>
 
         <div class="btn-group-vertical ml-0">
-            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="undo()">
                 <mat-icon>undo</mat-icon>
             </button>
             <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="redo()">

@@ -1,11 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UserGames, DataService, GameResponse, Game } from './data.service'
-import * as chess from "chess.js";
-
-
+import * as Chess from 'chess.js';
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class BoardService {
 
@@ -13,17 +12,20 @@ export class BoardService {
   selectedGame: Game | undefined;
   loading: boolean = false;
 
+  // Holds the loaded pgn 
+  chessContainer: any;
+  // Holds current state (feeds on container)
+  chessState: any;
+  moves: string[] = [];
+
   $selectedChanged: EventEmitter<any> = new EventEmitter();;
 
   constructor(private dataService: DataService) { }
 
   selectGame(game: Game) {
     this.selectedGame = game;
+    this.generateFen();
     this.$selectedChanged.next();
-  }
-
-  getSelectedGame(): Game | undefined {
-    return this.selectedGame;
   }
 
   next(direction: number = 1) {
@@ -50,6 +52,16 @@ export class BoardService {
     })
   }
 
+  generateFen() {
+    const ch = new Chess();
+    ch.load_pgn(this.selectedGame?.pgn)
+    let history = ch.history();
+    ch.reset();
+    history.forEach((move: string) => {
+      ch.move(move);
+      this.moves.push(ch.fen());
+    });
+  }
 
 
 }
