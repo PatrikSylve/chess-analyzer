@@ -1,24 +1,18 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <ngx-chess-board #board [size]="boardSize" [lightTileColor]="whiteColor" [darkTileColor]="blackColor">
-            </ngx-chess-board>
-        </div>
+    <div class="row p-5">
+        <ngx-chess-board #board [size]="boardSize" [lightTileColor]="whiteColor" [darkTileColor]="blackColor">
+        </ngx-chess-board>
 
-        <div class="col">
-            <div class="btn-group-vertical ml-0">
-                <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
-                    (click)="undo()">
-                    <mat-icon>undo</mat-icon>
-                </button>
-                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
-                    (click)="redo()">
-                    <mat-icon>redo</mat-icon>
-                </button>
-                <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
-                    <mat-icon>menu</mat-icon>
-                </button>
-            </div>
+        <div class="btn-group-vertical ml-0">
+            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="redo()">
+                <mat-icon>redo</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="fetch()">
+                <mat-icon>menu</mat-icon>
+            </button>
         </div>
     </div>
 </div>

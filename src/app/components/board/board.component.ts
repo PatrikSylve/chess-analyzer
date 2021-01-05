@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-board',
@@ -9,13 +10,13 @@ import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
 export class BoardComponent implements OnInit {
 
   @ViewChild('board', { static: false }) board: NgxChessBoardView | undefined;
-  boardSize = 800;
+  boardSize = 600;
 
   // Blueish theme
   blackColor = "#8ea2ac";
   whiteColor = "#dee2e6";
 
-  constructor(private ngxChessBoardService: NgxChessBoardService) { }
+  constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService) { }
 
   ngOnInit(): void {
   }
@@ -33,5 +34,10 @@ export class BoardComponent implements OnInit {
 
   redo(): void {
 
+  }
+
+
+  fetch() {
+    this.boardService.fetchGames({ user: "PataLata", year: 2020, month: 12 });
   }
 }
