@@ -11,6 +11,7 @@ export class BoardService {
 
   games: Game[] = [];
   selectedGame: Game | undefined;
+  loading: boolean = false;
 
   constructor(private dataService: DataService) { }
 
@@ -23,11 +24,17 @@ export class BoardService {
   }
 
   fetchGames(user: UserGames) {
+    this.loading = true;
     this.dataService.fetchGames(user).then(res => {
       return res.json();
     }).then(json => {
+
       this.games = json.games;
       console.log(this.games[0].black.username)
+    }).catch(e => {
+      console.error(e);
+    }).finally(() => {
+      this.loading = false;
     })
   }
 

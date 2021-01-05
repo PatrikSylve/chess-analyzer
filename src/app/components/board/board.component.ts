@@ -16,7 +16,11 @@ export class BoardComponent implements OnInit {
   blackColor = "#8ea2ac";
   whiteColor = "#dee2e6";
 
-  constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService) { }
+  loading: boolean;
+
+  constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService) {
+    this.loading = this.boardService.loading;
+  }
 
   ngOnInit(): void {
   }
