@@ -54,6 +54,7 @@ export class BoardService {
 
   generateFen() {
     const ch = new Chess();
+    this.moves = [];
     ch.load_pgn(this.selectedGame?.pgn)
     let history = ch.history();
     ch.reset();
@@ -61,6 +62,7 @@ export class BoardService {
       ch.move(move);
       this.moves.push(ch.fen());
     });
+
   }
 
 

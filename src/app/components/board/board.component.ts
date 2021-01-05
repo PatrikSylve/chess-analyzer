@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
 import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
 import { BoardService } from '../../services/board.service';
 import { Game } from '../../services/data.service';
@@ -9,7 +9,7 @@ import { Subscription, Subject } from 'rxjs';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
   @ViewChild('board', { static: false }) board: NgxChessBoardView | undefined;
   boardSize = 600;
@@ -33,8 +33,15 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.subs.push(this.boardService.$selectedChanged.subscribe(() => {
       this.selectedGame = this.boardService.selectedGame;
+      this.move = 0;
       this.updatePosition()
     }));
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(s => {
+      s.unsubscribe();
+    })
   }
 
   /**
@@ -60,6 +67,7 @@ export class BoardComponent implements OnInit {
    */
   next(direction: number = 1) {
     this.boardService.next(direction)
+    this.updatePosition();
   }
 
   /**
@@ -67,6 +75,15 @@ export class BoardComponent implements OnInit {
    */
   getCurrentPosition() {
     return this.boardService.moves[this.move];
+  }
+
+  getMoves() {
+    return this.boardService.moves;
+  }
+
+  setMoveNumber(num: number) {
+    this.move = num;
+    this.updatePosition();
   }
 
   updatePosition() {

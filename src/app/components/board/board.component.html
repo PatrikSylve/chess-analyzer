@@ -25,6 +25,14 @@
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
+
+        <div class="move-history" *ngIf="selectedGame">
+            <div *ngFor="let m of getMoves(); let i = index">
+                <div *ngIf="!(i % 2)">
+                    <p (click)="setMoveNumber(i)" [ngClass]="{'move': m == move}">{{i > 0 ? i/2 : i }}. </p>
+                </div>
+            </div>
+        </div>
     </div>
     <div *ngIf="loading" class="pt-5">
         <mat-progress-bar class="progress-bar" mode="indeterminate"></mat-progress-bar>

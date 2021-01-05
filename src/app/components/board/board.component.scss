@@ -5,3 +5,14 @@
 .game-header {
     width: 700px; 
 }
+
+.move-history {
+    width: 30%; 
+    height: 500px;
+    background-color: rgb(78, 88, 104);
+    overflow: scroll;
+}
+
+.move {
+    color:red;
+}
