@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { UserGames, DataService, GameResponse, Game } from './data.service'
 import * as chess from "chess.js";
 
@@ -13,14 +13,26 @@ export class BoardService {
   selectedGame: Game | undefined;
   loading: boolean = false;
 
+  $selectedChanged: EventEmitter<any> = new EventEmitter();;
+
   constructor(private dataService: DataService) { }
 
   selectGame(game: Game) {
     this.selectedGame = game;
+    this.$selectedChanged.next();
   }
 
   getSelectedGame(): Game | undefined {
     return this.selectedGame;
+  }
+
+  next(direction: number = 1) {
+    if (this.selectedGame) {
+      let index = this.games.indexOf(this.selectedGame) + direction;
+      if (index < 0) index = this.games.length - 1;
+      if (index > this.games.length - 1) index = 0;
+      this.selectGame(this.games[index]);
+    }
   }
 
   fetchGames(user: UserGames) {
@@ -28,9 +40,9 @@ export class BoardService {
     this.dataService.fetchGames(user).then(res => {
       return res.json();
     }).then(json => {
-
       this.games = json.games;
-      console.log(this.games[0].black.username)
+      this.selectGame(this.games[0]);
+      console.log("Number of games found: ", this.games.length)
     }).catch(e => {
       console.error(e);
     }).finally(() => {

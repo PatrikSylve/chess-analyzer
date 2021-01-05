@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~11.0.3",
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
+    "@types/events": "^3.0.0",
     "bootstrap": "^4.5.0",
     "chess.js": "^0.11.0",
     "ngx-chess-board": "^2.0.4",

@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
-import { BoardService } from 'src/app/services/board.service';
+import { BoardService } from '../../services/board.service';
+import { Game } from '../../services/data.service';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -18,11 +20,18 @@ export class BoardComponent implements OnInit {
 
   loading: boolean;
 
+  selectedGame: Game | undefined;
+
+  subs: Subscription[] = [];
+
   constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService) {
     this.loading = this.boardService.loading;
   }
 
   ngOnInit(): void {
+    this.subs.push(this.boardService.$selectedChanged.subscribe(() => {
+      this.selectedGame = this.boardService.selectedGame;
+    }));
   }
 
   /**
@@ -38,6 +47,10 @@ export class BoardComponent implements OnInit {
 
   redo(): void {
 
+  }
+
+  next(direction: number = 1) {
+    this.boardService.next(direction)
   }
 
 
