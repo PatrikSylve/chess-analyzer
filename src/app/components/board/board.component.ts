@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
 
 @Component({
   selector: 'app-board',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('board', { static: false }) board: NgxChessBoardView | undefined;
+
+  constructor(private ngxChessBoardService: NgxChessBoardService) { }
 
   ngOnInit(): void {
   }
