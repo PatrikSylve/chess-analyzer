@@ -23,13 +23,18 @@ export class BoardService {
   $selectedChanged: EventEmitter<any> = new EventEmitter();
   $positionChanged: EventEmitter<string> = new EventEmitter();
 
-  constructor(private dataService: DataService, private s: StatsService) { }
+  constructor(private dataService: DataService, private statsService: StatsService) {
+  }
 
   selectGame(game: Game) {
     this.selectedGame = game;
-    this.moves = this.dataService.generateFEN(this.selectedGame);
-    this.s.firstMove();
+    this.moves = this.statsService.fenList[this.games.indexOf(game)].fen;
+    this.statsService.firstMove();
     this.$selectedChanged.next();
+  }
+
+  selectGameByIndex(index) {
+    this.selectGame(this.games[index]);
   }
 
   next(direction: number = 1) {
@@ -47,30 +52,12 @@ export class BoardService {
       return res.json();
     }).then(json => {
       this.games = json.games;
-      this.s.addGames(this.games);
+      this.statsService.addGames(this.games);
       this.selectGame(this.games[0]);
-      console.log("Number of games found: ", this.games.length)
     }).catch(e => {
       console.error(e);
     }).finally(() => {
       this.loading = false;
     })
   }
-
-  // generateFen() {
-  //   const ch = new Chess();
-  //   console.log(ch);
-  //   this.moves = [];
-  //   console.log(pgnParser.parse(this.selectedGame?.pgn))
-  //   ch.load_pgn(this.selectedGame?.pgn)
-  //   let history = ch.history();
-  //   ch.reset();
-  //   history.forEach((move: string) => {
-  //     ch.move(move);
-  //     this.moves.push(ch.fen());
-  //   });
-
-  // }
-
-
 }

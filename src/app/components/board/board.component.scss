@@ -20,3 +20,23 @@
 .board-area {
     width:400px; margin-left: auto; margin-right: auto
 }
+
+.search{
+    background-color: #1c2a35; 
+    border: solid; 
+    border-color: grey;
+    border-radius: 10px;
+}
+::ng-deep .mat-focused .mat-form-field-label{
+    /*change color of label*/
+    color: white !important;
+   }
+
+
+input {
+    color: rgb(224, 223, 223)
+}
+
+mat-select {
+    color: white
+}

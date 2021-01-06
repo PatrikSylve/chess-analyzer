@@ -9,6 +9,7 @@ declare module "chess.js" {
         reset(): any;
         move(move: any): any;
         fen(): any;
+        load(p: string): void;
 
     }
 

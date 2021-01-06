@@ -4,8 +4,8 @@ import * as pgnParser from 'pgn-parser';
 
 export interface UserGames {
   user: string,
-  year: number,
-  month: number
+  year: string,
+  month: string
 }
 
 export interface GameResponse {
@@ -69,5 +69,10 @@ export class DataService {
     });
 
     return moves;
+  }
+
+  getFenFromFen(fen): string {
+    this.chessjs.load(fen);
+    return this.chessjs.fen();
   }
 }

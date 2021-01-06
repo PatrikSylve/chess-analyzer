@@ -1,6 +1,44 @@
 <div class="gamelist">
-    <mat-action-list>
-        <button mat-list-item> Save </button>
-        <button mat-list-item> Undo </button>
-    </mat-action-list>
+    <div class="mat-elevation-z8" *ngIf="gameInfo.length">
+        <table mat-table [dataSource]="gameInfo" matSort>
+
+
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Show game </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
+                        (click)="selectGame(row.index)">
+                        <mat-icon>forward</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="white">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> White </th>
+                <td mat-cell *matCellDef="let row"> {{row.white}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="black">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Black </th>
+                <td mat-cell *matCellDef="let row"> {{row.black}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="result">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Result (white - black)</th>
+                <td mat-cell *matCellDef="let row"> {{row.result}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="url">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> link </th>
+                <td mat-cell *matCellDef="let row"> <a [href]="row.url"> {{row.url}} </a></td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
 </div>

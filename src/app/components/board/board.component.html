@@ -35,6 +35,39 @@
             </div>
         </div>
     </div>
+    <!--Search games by user and time period-->
+    <div class="search">
+
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput [(ngModel)]="username">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Year</mat-label>
+                    <input [(ngModel)]="year" type="number" matInput>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Month</mat-label>
+                    <mat-select #monthValue>
+                        <mat-option *ngFor="let month of month" [value]="month.value">
+                            {{month.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+            <td>
+                <button mat-button (click)="$event.preventDefault(); fetch()">Search</button>
+            </td>
+        </tr>
+    </div>
+
+
     <app-stats></app-stats>
     <div *ngIf="loading" class="pt-5">
         <mat-progress-bar class="progress-bar" mode="indeterminate"></mat-progress-bar>

@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, OnDestroy, ElementRef } from '@angular/core';
 import { NgxChessBoardService, NgxChessBoardView } from 'ngx-chess-board';
 import { BoardService } from '../../services/board.service';
 import { Game } from '../../services/data.service';
 import { Subscription, Subject } from 'rxjs';
+import { StatsService } from '../../services/stats.service';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
 
 export class Stats {
   games: any;
@@ -29,8 +32,29 @@ export class BoardComponent implements OnInit, OnDestroy {
   move: number = 0;
   subs: Subscription[] = [];
 
+  // search 
+  month = [
+    { name: "January", value: "01" },
+    { name: "February", value: "02" },
+    { name: "Mars", value: "03" },
+    { name: "April", value: "04" },
+    { name: "May", value: "05" },
+    { name: "June", value: "06" },
+    { name: "July", value: "07" },
+    { name: "August", value: "08" },
+    { name: "September", value: "09" },
+    { name: "October", value: "10" },
+    { name: "November", value: "11" },
+    { name: "December", value: "12" },
 
-  constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService) {
+  ]
+  username;
+  year = 2021;
+  @ViewChild('monthValue') monthValue: MatSelect;
+
+  public currentValue: string = null;
+
+  constructor(private ngxChessBoardService: NgxChessBoardService, private boardService: BoardService, private statService: StatsService) {
     this.loading = this.boardService.loading;
   }
 
@@ -40,6 +64,10 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.move = 0;
       this.updatePosition()
     }));
+    this.subs.push(this.statService.$loading.subscribe(load => {
+      console.log("load", load)
+      this.loading = load;
+    }))
   }
 
   ngOnDestroy() {
@@ -75,6 +103,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   moveChange() {
+    console.log("move")
     this.boardService.$positionChanged.next(this.board.getFEN());
   }
 
@@ -96,11 +125,12 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   updatePosition() {
     this.board && this.board.setFEN(this.getCurrentPosition());
-    this.boardService.$positionChanged.next(this.board.getFEN())
+    this.boardService.$positionChanged.next(this.getCurrentPosition())
   }
 
   fetch() {
-    this.boardService.fetchGames({ user: "PataLata", year: 2020, month: 12 });
+    this.loading = true;
+    this.boardService.fetchGames({ user: this.username, year: this.year.toString(), month: this.monthValue.value });
   }
 
 }
