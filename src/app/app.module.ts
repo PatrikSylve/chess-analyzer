@@ -8,10 +8,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { StatsComponent } from './components/stats/stats.component';
+
+
+import { MatListModule } from '@angular/material/list';
+
+import { MatTabsModule } from '@angular/material/tabs';
+import { GamesComponent } from './components/stats/games/games.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BoardComponent
+    BoardComponent,
+    StatsComponent,
+    GamesComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +29,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

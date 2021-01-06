@@ -44,7 +44,8 @@ export interface Move {
 })
 export class DataService {
   base: string = "https://api.chess.com/";
-
+  // @ts-ignore
+  chessjs = new Chess();
   constructor() { }
 
 
@@ -57,16 +58,16 @@ export class DataService {
     return pgnParser.parse(pgn)?.[0];
   }
 
-  // generateFEN(game) {
-  //   const ch = new Chess();
-  //   this.moves = [];
-  //   ch.load_pgn(this.selectedGame?.pgn)
-  //   let history = ch.history();
-  //   ch.reset();
-  //   history.forEach((move: string) => {
-  //     ch.move(move);
-  //     this.moves.push(ch.fen());
-  //   });
+  generateFEN(game) {
+    const moves = [];
+    this.chessjs.load_pgn(game?.pgn)
+    let history = this.chessjs.history();
+    this.chessjs.reset();
+    history.forEach((move: string) => {
+      this.chessjs.move(move);
+      moves.push(this.chessjs.fen());
+    });
 
-  // }
+    return moves;
+  }
 }

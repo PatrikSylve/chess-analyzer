@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { UserGames, DataService, GameResponse, Game } from './data.service'
 import * as Chess from 'chess.js';
 import * as pgnParser from 'pgn-parser';
+import { StatsService } from './stats.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,13 +20,15 @@ export class BoardService {
   chessState: any;
   moves: string[] = [];
 
-  $selectedChanged: EventEmitter<any> = new EventEmitter();;
+  $selectedChanged: EventEmitter<any> = new EventEmitter();
+  $positionChanged: EventEmitter<string> = new EventEmitter();
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private s: StatsService) { }
 
   selectGame(game: Game) {
     this.selectedGame = game;
-    this.generateFen();
+    this.moves = this.dataService.generateFEN(this.selectedGame);
+    this.s.firstMove();
     this.$selectedChanged.next();
   }
 
@@ -44,6 +47,7 @@ export class BoardService {
       return res.json();
     }).then(json => {
       this.games = json.games;
+      this.s.addGames(this.games);
       this.selectGame(this.games[0]);
       console.log("Number of games found: ", this.games.length)
     }).catch(e => {
@@ -53,20 +57,20 @@ export class BoardService {
     })
   }
 
-  generateFen() {
-    const ch = new Chess();
-    console.log(ch);
-    this.moves = [];
-    console.log(pgnParser.parse(this.selectedGame?.pgn))
-    ch.load_pgn(this.selectedGame?.pgn)
-    let history = ch.history();
-    ch.reset();
-    history.forEach((move: string) => {
-      ch.move(move);
-      this.moves.push(ch.fen());
-    });
+  // generateFen() {
+  //   const ch = new Chess();
+  //   console.log(ch);
+  //   this.moves = [];
+  //   console.log(pgnParser.parse(this.selectedGame?.pgn))
+  //   ch.load_pgn(this.selectedGame?.pgn)
+  //   let history = ch.history();
+  //   ch.reset();
+  //   history.forEach((move: string) => {
+  //     ch.move(move);
+  //     this.moves.push(ch.fen());
+  //   });
 
-  }
+  // }
 
 
 }

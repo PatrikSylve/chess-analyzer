@@ -4,6 +4,10 @@ import { BoardService } from '../../services/board.service';
 import { Game } from '../../services/data.service';
 import { Subscription, Subject } from 'rxjs';
 
+export class Stats {
+  games: any;
+}
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -70,6 +74,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.updatePosition();
   }
 
+  moveChange() {
+    this.boardService.$positionChanged.next(this.board.getFEN());
+  }
+
   /**
    * Return FEN on index move from moves-array
    */
@@ -87,7 +95,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   updatePosition() {
-    this.board && this.board.setFEN(this.getCurrentPosition())
+    this.board && this.board.setFEN(this.getCurrentPosition());
+    this.boardService.$positionChanged.next(this.board.getFEN())
   }
 
   fetch() {
