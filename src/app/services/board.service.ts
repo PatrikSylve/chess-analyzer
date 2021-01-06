@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UserGames, DataService, GameResponse, Game } from './data.service'
 import * as Chess from 'chess.js';
+import * as pgnParser from 'pgn-parser';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,7 +55,9 @@ export class BoardService {
 
   generateFen() {
     const ch = new Chess();
+    console.log(ch);
     this.moves = [];
+    console.log(pgnParser.parse(this.selectedGame?.pgn))
     ch.load_pgn(this.selectedGame?.pgn)
     let history = ch.history();
     ch.reset();

@@ -3,6 +3,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "types": [
+      "node",
+      "pgn.d.ts"
+    ],
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -14,6 +18,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "noImplicitAny": false,
     "target": "es2015",
     "module": "es2020",
     "lib": [
@@ -27,6 +32,7 @@
     "strictTemplates": true
   },
   "include": [
-    "chess.d.ts"
+    "chess.d.ts",
+    "pgn.d.ts",
   ],
 }

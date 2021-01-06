@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Chess from 'chess.js';
+import * as pgnParser from 'pgn-parser';
 
 export interface UserGames {
   user: string,
@@ -28,6 +29,16 @@ export interface Player {
   username: string
 }
 
+export interface PGN {
+  result: string,
+  moves: Move[]
+}
+
+export interface Move {
+  move: string,
+  move_number: number
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +51,10 @@ export class DataService {
   fetchGames(user: UserGames) {
     let url = this.base + "pub/player/" + user.user + "/games/" + user.year + "/" + user.month;
     return fetch(url);
+  }
+
+  parsePgn(pgn: string): PGN {
+    return pgnParser.parse(pgn)?.[0];
   }
 
   // generateFEN(game) {

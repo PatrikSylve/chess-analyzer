@@ -27,6 +27,7 @@
     "bootstrap": "^4.5.0",
     "chess.js": "^0.11.0",
     "ngx-chess-board": "^2.0.4",
+    "pgn-parser": "^2.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -36,7 +37,7 @@
     "@angular/cli": "~11.0.3",
     "@angular/compiler-cli": "~11.0.3",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.19.12",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",

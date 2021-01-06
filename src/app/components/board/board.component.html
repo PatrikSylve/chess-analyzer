@@ -1,13 +1,13 @@
 <div class="container-fluid pt-5">
     <div class="row game-header d-flex justify-content-between" *ngIf="selectedGame">
-        <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(-1)">
-            <mat-icon>keyboard_arrow_left</mat-icon>
+        <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(1)">
+            <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
         <h2 class="game">{{selectedGame.white.username}} ({{selectedGame.white.rating}}) -
             {{selectedGame.black.username}} ({{selectedGame.black.rating}})</h2>
 
-        <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(1)">
-            <mat-icon>keyboard_arrow_right</mat-icon>
+        <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(-1)">
+            <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
         <div class="move-history" *ngIf="selectedGame">
             <div *ngFor="let m of getMoves(); let i = index">
                 <div *ngIf="!(i % 2)">
-                    <p (click)="setMoveNumber(i)" [ngClass]="{'move': m == move}">{{i > 0 ? i/2 : i }}. </p>
+                    <p (click)="setMoveNumber(i)" [ngClass]="{'move': true}">{{i > 0 ? i/2 : i }}. </p>
                 </div>
             </div>
         </div>
