@@ -1,4 +1,37 @@
+<div class="search mb-3 ">
+
+    <tr class="mt-3">
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label>
+                <input matInput [(ngModel)]="username" color="primary">
+            </mat-form-field>
+        </td>
+        <td class="mr-1">
+            <mat-form-field class="example-full-width pr-3">
+                <mat-label>Year</mat-label>
+                <input [(ngModel)]="year" color="primary" type="number" matInput>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="pr-3 pl-3">
+                <mat-label>Month</mat-label>
+                <mat-select #monthValue color="primary">
+                    <mat-option *ngFor="let month of month" [value]="month.value">
+                        {{month.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td class="mr-1">
+            <button mat-raised-button color="primary" (click)="$event.preventDefault(); fetch()">Search</button>
+        </td>
+    </tr>
+</div>
 <div class="container-fluid pt-5 ">
+    <!--Search games by user and time period-->
+
+
     <div class="row game-header d-flex justify-content-between" *ngIf="selectedGame">
         <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="next(1)">
             <mat-icon>keyboard_arrow_left</mat-icon>
@@ -14,57 +47,19 @@
         <ngx-chess-board #board (moveChange)="moveChange()" [size]="boardSize" [lightTileColor]="whiteColor"
             [darkTileColor]="blackColor">
         </ngx-chess-board>
-
-        <div class="btn-group-vertical ml-0">
-            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="undo()">
-                <mat-icon>undo</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="redo()">
-                <mat-icon>redo</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="fetch()">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </div>
-
-        <div class="move-history" *ngIf="selectedGame">
-            <div *ngFor="let m of getMoves(); let i = index">
-                <div *ngIf="!(i % 2)">
-                    <p (click)="setMoveNumber(i)" [ngClass]="{'move': true}">{{i > 0 ? i/2 : i }}. </p>
-                </div>
+        <div>
+            <app-moves (goToMove)="setMoveNumber($event)" [moveNbr]="move"></app-moves>
+            <div class="btn-group-horisontal ml-0 d-flex justify-content-center" style="width:100%">
+                <button class="ml-1" mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                    (click)="undo()">
+                    <mat-icon>skip_previous</mat-icon>
+                </button>
+                <button class="mr-1" mat-icon-button aria-label="Example icon button with a home icon" (click)="redo()">
+                    <mat-icon>skip_next</mat-icon>
+                </button>
             </div>
         </div>
-    </div>
-    <!--Search games by user and time period-->
-    <div class="search">
 
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Username</mat-label>
-                    <input matInput [(ngModel)]="username">
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Year</mat-label>
-                    <input [(ngModel)]="year" type="number" matInput>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>Month</mat-label>
-                    <mat-select #monthValue>
-                        <mat-option *ngFor="let month of month" [value]="month.value">
-                            {{month.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-            <td>
-                <button mat-button (click)="$event.preventDefault(); fetch()">Search</button>
-            </td>
-        </tr>
     </div>
 
 

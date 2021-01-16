@@ -103,7 +103,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   moveChange() {
-    console.log("move")
     this.boardService.$positionChanged.next(this.board.getFEN());
   }
 
@@ -124,6 +123,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   updatePosition() {
+    if (!this.move) return;
     this.board && this.board.setFEN(this.getCurrentPosition());
     this.boardService.$positionChanged.next(this.getCurrentPosition())
   }

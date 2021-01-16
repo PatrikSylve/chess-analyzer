@@ -1,0 +1,13 @@
+<div class="move-view">
+    <div *ngFor="let move of moves;let i = index; let even = even;">
+        <div class="move-row" *ngIf="even">
+            <div *ngIf="moves[i].move_number">
+                <p class="move-nbr ">{{move.move_number}} </p>
+                <p class="move" [ngClass]="{'current-move': i == moveNbr}" (click)="moveClicked(i)">{{move.move}}</p>
+                <p class="move" [ngClass]="{'current-move': i+1 == moveNbr}" (click)="moveClicked(i+1)">
+                    {{moves[i+1].move}} </p>
+            </div>
+
+        </div>
+    </div>
+</div>

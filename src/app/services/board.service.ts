@@ -60,4 +60,8 @@ export class BoardService {
       this.loading = false;
     })
   }
+
+  getMoves() {
+    return this.selectedGame ? this.dataService.parsePgn(this.selectedGame.pgn).moves : [];
+  }
 }

@@ -24,12 +24,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { GamesComponent } from './components/stats/games/games.component';
 import { FormsModule } from '@angular/forms';
+import { MovesComponent } from './components/board/moves/moves.component';
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     StatsComponent,
-    GamesComponent
+    GamesComponent,
+    MovesComponent
   ],
   imports: [
     BrowserModule,

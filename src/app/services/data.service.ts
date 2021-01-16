@@ -36,7 +36,7 @@ export interface PGN {
 
 export interface Move {
   move: string,
-  move_number: number
+  move_number?: number
 }
 
 @Injectable({

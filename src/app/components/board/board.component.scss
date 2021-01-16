@@ -4,6 +4,7 @@
 
 .game-header {
     width: 700px; 
+    color: rgb(217, 221, 226);
 }
 
 .move-history {
@@ -12,6 +13,11 @@
     background-color: rgb(78, 88, 104);
     overflow: scroll;
 }
+
+.mat-icon {
+    font-size: 50px;
+    color: #d4d1d1;
+  }
 
 .move {
     color:red;
@@ -22,10 +28,14 @@
 }
 
 .search{
-    background-color: #1c2a35; 
+    background-color: #35465c; 
     border: solid; 
     border-color: grey;
     border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100px;
 }
 ::ng-deep .mat-focused .mat-form-field-label{
     /*change color of label*/
@@ -37,6 +47,3 @@ input {
     color: rgb(224, 223, 223)
 }
 
-mat-select {
-    color: white
-}

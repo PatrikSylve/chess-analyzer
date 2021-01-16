@@ -40,10 +40,10 @@ export class StatsService {
    * Get list of all positions from all games 
    */
   generateFenList() {
-    let start = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    //let start = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     this.games.forEach((game, i) => {
       this.fenList.push({
-        fen: [start, ...this.dataService.generateFEN(game)],
+        fen: this.dataService.generateFEN(game),
         index: i
       });
     })

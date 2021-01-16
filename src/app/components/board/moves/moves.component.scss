@@ -1,0 +1,40 @@
+.move-view {
+    width: 400px; 
+    height: 500px; 
+    background-color:#515354; //#35465c;
+    padding-top: 13px;
+    overflow: scroll;
+}
+
+.move-row {
+    display: inline;
+}
+
+.move-nbr {
+    background-color: #414d5c;
+    color: #caccce; 
+    font-size: 1.2rem; 
+    display: inline;
+    border-right: 2px solid #2b3a4d;
+    line-height: 2em;
+    padding: 20px
+}
+
+.move {
+    display: inline-block;
+    font-size: 1.2rem; 
+    line-height: 2em;
+    color: rgb(217, 221, 226); 
+    min-width: 40%;
+    margin-left: 10px;
+    
+}
+
+.move:hover {
+    cursor: pointer;
+}
+
+.current-move {
+    background-color: #636479a3; 
+}
+
