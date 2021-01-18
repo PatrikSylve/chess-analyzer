@@ -35,6 +35,7 @@ export class GamesComponent implements OnInit {
   }
 
   selectGame(index) {
+    window.scrollTo(0, 30)
     this.boardService.selectGameByIndex(index);
   }
 

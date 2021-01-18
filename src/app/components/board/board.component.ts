@@ -118,6 +118,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   setMoveNumber(num: number) {
+    if (this.move >= this.boardService.moves.length) {
+      console.error("Move nbr: ", num, " doesnt exist");
+      return;
+    }
     this.move = num;
     this.updatePosition();
   }
