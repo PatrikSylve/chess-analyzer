@@ -14,10 +14,12 @@
     background-color: #414d5c;
     color: #caccce; 
     font-size: 1.2rem; 
-    display: inline;
+    display: inline-block;
     border-right: 2px solid #2b3a4d;
     line-height: 2em;
-    padding: 20px
+    padding: 20px;
+    width: 15%;
+    margin: 0; 
 }
 
 .move {
@@ -25,9 +27,8 @@
     font-size: 1.2rem; 
     line-height: 2em;
     color: rgb(217, 221, 226); 
-    min-width: 40%;
-    margin-left: 10px;
-    
+    min-width: 37%;
+    margin-left: 10px;   
 }
 
 .move:hover {
