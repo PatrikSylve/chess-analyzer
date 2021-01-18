@@ -6,8 +6,7 @@
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Show game </th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
-                        (click)="selectGame(row.index)">
+                    <button mat-icon-button color="accent" (click)="selectGame(row.index)">
                         <mat-icon>forward</mat-icon>
                     </button>
                 </td>
